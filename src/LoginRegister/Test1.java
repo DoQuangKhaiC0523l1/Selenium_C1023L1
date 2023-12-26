@@ -1,4 +1,4 @@
-package selenium.khai;
+package LoginRegister;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Test1 {
     WebDriver driver;
-
+    String txbEmail="//input[@id='email']";
+    String txbPassword = "//input[@id='password']";
+    String bttLogin = "//input[@name='submit']";
+    String bbtLogout = "//input[@value='Log out']";
+    String mess = "//b[text()='Enter your Email address and password correct']";
 
 
 
@@ -27,19 +31,16 @@ public class Test1 {
     }
     @Test
     public void TC_1(){
-        WebElement InputEmail = driver.findElement(By.xpath("//input[@id='email']"));
-        WebElement InputPassword = driver.findElement(By.xpath("//input[@id='password']"));
-        WebElement buttonLogin = driver.findElement(By.xpath("//input[@name='submit']"));
-        WebElement buttonLogout = driver.findElement(By.xpath("//input[@value='Log out']"));
-        WebElement Message = driver.findElement(By.xpath("//input[@id='email']"));
-
-        System.out.println("Step-1: Do not input Email and all data valid");
+        WebElement InputEmail = driver.findElement(By.xpath(txbEmail));
         InputEmail.sendKeys();
+        WebElement InputPassword = driver.findElement(By.xpath(txbPassword));
         InputPassword.sendKeys("123123");
+        WebElement buttonLogin = driver.findElement(By.xpath(bttLogin));
         buttonLogin.click();
+        WebElement Message = driver.findElement(By.xpath(mess));
         String Actual = Message.getText();
-        Assert.assertEquals(Actual,"Enter your Email address and password correct","Sai thông báo");
-        buttonLogout.click();
+        Assert.assertEquals(Actual,"Enter your Email address and password correct");
+        System.out.println(Actual);
     }
     @AfterClass
     public void after(){}
